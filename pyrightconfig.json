@@ -1,0 +1,13 @@
+{
+  "venvPath": ".",
+  "venv": "venv",
+  "extraPaths": ["."],
+  "typeCheckingMode": "off",
+  "exclude": [
+    "venv",
+    "lib",
+    "build",
+    "dist",
+    "**/__pycache__"
+  ]
+}

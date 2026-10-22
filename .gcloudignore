@@ -1,0 +1,58 @@
+# What NOT to upload to Cloud Build. Without this, `gcloud run deploy --source`
+# ships the venv, the client database and the .env alongside the source.
+#
+# NOTE: .gcloudignore REPLACES .gitignore for build uploads — anything that must
+# stay out has to be listed here too, even if git already ignores it.
+
+# Secrets — never leave the machine
+.env
+*.env.*
+.app_secret_key
+
+# Local databases and their backups (client data)
+*.db
+*.db-wal
+*.db-shm
+project_data.db*
+neo4j_backup_*.json
+
+# Python local state
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Git / editor / agent state
+.git/
+.github/
+.vscode/
+.idea/
+.claude/
+.superpowers/
+
+# Node — the image does not build the React frontend
+FabricBI_beta/node_modules/
+node_modules/
+
+# Runtime output, regenerated in the container
+logs/
+uploads/
+projects/
+models/
+bridge_io/
+.registry_cache/
+.pending_model_edits.json
+.measure_registry.json
+.column_registry.json
+
+# Local-only Windows/Desktop bits that cannot work on Cloud Run
+mcp_powerbi.ps1
+*.pbix
+*.pbip
+
+# Docs and other deploy targets — not needed to run
+BI/
+generated_docs/
+deploy/hf/
+HANDOVER.md

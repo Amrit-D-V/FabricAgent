@@ -1,0 +1,214 @@
+# Environment
+.env
+*.env.*
+# ...but the example files carry no secrets and are the documentation of
+# what must be set. `*.env.*` above matches them, so they need naming back in.
+!.env.example
+!deploy/vm/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.grimp_cache/
+.import_linter_cache/
+.unlazy/
+.cache/
+
+# Scratch & Audio tests
+audio-test.py
+
+# Virtual environment
+venv
+venv/
+env
+env/
+.venv
+.venv/
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code
+.claude/
+.superpowers/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Power BI — generated reports (built by agent, not source)
+reports/
+
+# Power BI — local Desktop settings (machine-specific, never commit)
+.pbi/
+
+# Power BI — compiled/binary formats
+*.pbix
+*.pbids
+*.pbiviz
+
+# Power BI — IDE/build artifacts
+pBIAIChat/
+pbi_chat_window.py
+
+# Node / npm
+node_modules/
+package-lock.json
+
+# Lib dependencies
+lib/
+
+# Generated schema dumps
+*_schema.txt
+
+# Logs
+*.log
+
+# Obsidian vault (project documentation, auto-updated)
+BI/
+
+# Runtime state / registries (generated per-session, never source)
+.measure_registry.json
+.column_registry.json
+.measure_registry.json.tmp*
+.column_registry.json.tmp*
+.registry_cache/
+.pending_model_edits.json
+.created_model_objects_*.json
+
+# Power BI external-tool manifests (generated with machine-specific paths;
+# the connector sample template is the tracked exception)
+*.pbitool.json
+!connector/fabricbi_connector.pbitool.json
+
+# Manual LLM bridge audit log (per-step prompts + responses)
+bridge_io/
+
+# Project database (local, contains client/project data) — including
+# .bak_*/.corrupt_* copies and -shm/-wal sidecars
+project_data.db*
+
+# Generated semantic model output (built by Agent 2, not source)
+models/
+
+# User-uploaded documents (client data, not source)
+uploads/
+
+# Log files
+logs/
+
+storage/
+projects/
+
+Dashboards/
+
+assets/
+
+
+# Generated markdown docs (workflow diagrams, summaries, auto-generated reports)
+generated_docs/
+
+CLAUDE.md
+
+# Databases — local only, contain client/project data
+*.db
+*.db-wal
+*.db-shm
+*.drawio
+*.bkp
+
+# Ad-hoc debug / scratch scripts (not part of app)
+debug_*.py
+scratch_*.py
+
+# Generated lint/type reports (regenerated on demand, never source)
+*_report.txt
+
+# Generated reports / diagrams
+*.docx
+*_diagram*.json
+dataflow_diagram_v2.json
+
+# Binary installers
+*.exe
+
+# Pinned third-party lint binaries (re-downloadable from NatVanG/fab-inspector
+# v3.3.0; the rules JSONs next to them ARE tracked)
+tools/pbi-inspector/win-x64/
+
+# Temporary build scripts
+build_report.py
+
+models_test_v1
+*.pptx
+*.sql
+*.md
+*.tmp
+!README.md
+!CONTRIBUTING.md
+!CODE_OF_CONDUCT.md
+!FABRICAGENT_CONTEXT.md
+!FABRICBI_CONTEXT.md
+# Skills served to the assistant (vendored + local) ARE source
+!skills/**/*.md
+# Deployment docs are source too
+!deploy/**/*.md
+*.html
+*.pdf
+
+# tests/ used to be ignored wholesale. That silently untracked every test
+# written in the conventional location — the suite would look present locally
+# and be absent from the repo. Test code is source; only its artifacts are not.
+.pytest_cache/
+tests/**/__pycache__/
+
+
+# App master encryption key (org LLM keys at rest) — never commit
+.app_secret_key
+
+# Neo4j org-memory exports (client data, local backups only)
+neo4j_backup_*.json
+
+# Local backups: database snapshots and org-memory exports. Client data — this
+# directory must never be committed. The db.bak_*/db.corrupt_* files WERE
+# committed once (42993b4, acdf66f, 237523c) and are still in the pushed
+# history; moving them here does not undo that, see HANDOVER section 5.
+backups/
+
+# graphify code graph — regenerated from source in ~20s, and carries an AST
+# cache plus a full structural map of the codebase. Rebuild it, don't commit it:
+#   graphify update .
+graphify-out/
+
+theme-void/
+
+# --- The React app is source ------------------------------------------------
+# Several rules above are aimed at Python build output and generated files, and
+# they were silently swallowing the frontend: `lib/` took web/src/lib (the API
+# client, session, nav registry, SSE helper), `assets/` took web/src/assets
+# (the logo and the mascot), and `*.html` took web/index.html, the app's entry
+# point. A fresh clone produced a React app that could not build.
+#
+# Negations, rather than editing the rules above, so the Python intent of each
+# is left intact.
+!web/index.html
+!web/src/
+!web/src/**
+!web/public/
+!web/public/**
+# Still generated, still ignored.
+web/node_modules/
+web/dist/
+web/.env.local
+

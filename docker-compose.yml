@@ -1,0 +1,29 @@
+services:
+  fabricbi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fabricbi:latest
+    container_name: fabricbi
+    restart: unless-stopped
+    ports:
+      - "8756:8756"
+    environment:
+      - PROJECTS_DIR=/data/projects
+      - UPLOADS_DIR=/data/uploads
+      - DB_PATH=/data/project_data.db
+      - FABRICBI_AGENT_HOST=0.0.0.0
+      - FABRICBI_AGENT_PORT=8756
+      - FABRICBI_ALLOW_INSECURE_SHARED=1
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - fabricbi_data:/data/projects
+      - fabricbi_uploads:/data/uploads
+      - fabricbi_db:/data
+
+volumes:
+  fabricbi_data:
+  fabricbi_uploads:
+  fabricbi_db:

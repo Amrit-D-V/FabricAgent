@@ -1,0 +1,53 @@
+# Render Blueprint for FabricBI.
+#
+# Use this instead of clicking through "New Web Service": it pins the correct
+# Dockerfile, the instance size, the persistent disk, and the health check in
+# one place. In Render: New -> Blueprint -> pick this repo.
+services:
+  - type: web
+    name: fabricbi
+    runtime: docker
+    plan: standard          # 2 GB RAM / 1 CPU.
+    dockerfilePath: ./deploy/render/Dockerfile
+    dockerContext: .        # the image COPYs requirements.txt + the app root
+    healthCheckPath: /health
+    autoDeploy: false
+
+    # A disk forces a single instance and disables zero-downtime deploys
+    # (Render stops the old instance before starting the new one). Both are
+    # fine here: FabricBI is a single-writer SQLite app and would corrupt its
+    # database with two instances on one disk.
+    numInstances: 1
+    disk:
+      name: fabricbi-data
+      mountPath: /data
+      sizeGB: 1             # can be grown later, never shrunk. $0.25/GB/mo.
+
+    envVars:
+      # --- Persistence: these three are why the disk is worth attaching -----
+      - key: DB_PATH
+        value: /data/project_data.db
+      - key: PROJECTS_DIR
+        value: /data/projects
+      - key: FABRICBI_TEMP_DIR
+        value: /data/projects/fabricbi_temp
+
+      - key: FABRIC_WORKSPACE
+        value: demo-workspace
+
+      # --- Secrets: sync:false means "leave blank here, set in the dashboard"
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: APP_ENCRYPTION_KEY   # openssl rand -hex 32 — losing it orphans
+        sync: false               # every saved Fabric credential.
+      - key: AZURE_TENANT_ID
+        sync: false
+      - key: AZURE_CLIENT_ID
+        sync: false
+      - key: AZURE_CLIENT_SECRET
+        sync: false
+
+      # Browser frontends are blocked until listed. Uncomment and set when the
+      # React app has a URL; the code reads FABRICBI_FRONTEND_ORIGINS.
+      # - key: FABRICBI_FRONTEND_ORIGINS
+      #   value: https://your-frontend.example.com

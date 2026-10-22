@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fabricagent"
+version = "0.2.0"
+description = "FabricAgent — Autonomous Open-Source AI Agent for Microsoft Power BI & Microsoft Fabric"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "FabricAgent Contributors" }
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+[project.scripts]
+fabricagent = "cli.main:cli"
+fabric-agent = "cli.main:cli"
+fabricbi = "cli.main:cli"
+
+[tool.setuptools.packages.find]
+include = ["api*", "auth*", "cli*", "core*", "dax*", "db*", "evals*", "fabric*", "llm*", "model*", "report*", "util*", "semantic_model_v2*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+extend-exclude = '''
+/(
+    venv
+  | \.venv
+  | build_ctx
+  | \.claude
+  | BI
+)/
+'''

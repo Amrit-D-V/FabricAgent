@@ -1,0 +1,61 @@
+# What graphify may read when building the code graph.
+#
+# graphify already honours .gitignore, which does most of the work here: it
+# keeps venv/ out (15,273 of this repo's 15,473 .py files are site-packages),
+# along with node_modules/, secrets and every client-data file. This file only
+# handles the two places .gitignore is the WRONG filter for a code graph.
+#
+# Patterns here are evaluated LAST and win on conflict, so a "!" line re-includes
+# something .gitignore dropped, and a plain line excludes something .gitignore
+# would have allowed.
+
+# --- Re-include: docs .gitignore drops as a side effect ----------------------
+# .gitignore:139 is a blanket `*.md`, negated only for README.md, skills/** and
+# deploy/**. HANDOVER.md is the architectural map of this project — the single
+# most useful non-code file in the graph — and it is not tracked by git at all.
+!HANDOVER.md
+
+# --- Stay out, regardless of what .gitignore says ----------------------------
+# These are listed explicitly rather than inherited. .gitignore is edited for
+# git's reasons, and a future loosening there must NOT silently pull client
+# data or credentials into a graph that gets queried and quoted back.
+
+# Credentials and key material
+.env
+*.env.*
+.app_secret_key
+
+# Client and project data
+project_data.db*
+*.db
+*.db-wal
+*.db-shm
+neo4j_backup_*.json
+uploads/
+projects/
+models/
+logs/
+BI/
+generated_docs/
+
+# Vendored / generated / binary — no useful edges, large parse cost
+venv/
+.venv/
+env/
+node_modules/
+__pycache__/
+lib/
+dist/
+build/
+FabricBI_beta/dist/
+tools/pbi-inspector/win-x64/
+.registry_cache/
+*.pbix
+*.pbiviz
+*.exe
+*.png
+*.pptx
+*.docx
+
+# graphify's own output — never feed the graph back into itself
+graphify-out/

@@ -1,0 +1,65 @@
+[
+  {
+    "ID": "MEASURES_HAVE_FORMAT_STRING",
+    "Name": "Measures should have a format string",
+    "Category": "Formatting",
+    "Description": "Visible measures with no format string render as raw numbers in Q&A and Excel.",
+    "Severity": 2,
+    "Scope": "Measure",
+    "Expression": "not IsHidden and string.IsNullOrWhiteSpace(FormatString)"
+  },
+  {
+    "ID": "MEASURES_NO_DAX_EXPRESSION",
+    "Name": "Measure has empty DAX expression",
+    "Category": "Modeling",
+    "Description": "Measures with empty / BLANK() DAX have no business logic; they ship as analyst-fix-this placeholders.",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "string.IsNullOrWhiteSpace(Expression) or Expression.Trim() == \"BLANK()\""
+  },
+  {
+    "ID": "MEASURES_DISPLAY_FOLDER",
+    "Name": "Measures should live in a display folder",
+    "Category": "Formatting",
+    "Description": "Measures without DisplayFolder pile up at the table root and clutter the field list. Group them by topic.",
+    "Severity": 1,
+    "Scope": "Measure",
+    "Expression": "not IsHidden and string.IsNullOrWhiteSpace(DisplayFolder)"
+  },
+  {
+    "ID": "COLUMNS_HIDE_FK",
+    "Name": "Foreign-key columns should be hidden",
+    "Category": "Formatting",
+    "Description": "FK columns (used in relationships) shouldn't appear in the field list — analysts pick them by mistake instead of the dim's name column.",
+    "Severity": 2,
+    "Scope": "Column",
+    "Expression": "Model.Relationships.Any(it.FromColumn == outerIt or it.ToColumn == outerIt) and IsHidden == false and IsKey == false"
+  },
+  {
+    "ID": "RELATIONSHIPS_USE_DISCOURAGED_BIDI",
+    "Name": "Avoid bi-directional relationships",
+    "Category": "Performance",
+    "Description": "Bi-directional cross-filter relationships cause ambiguity and slow query plans. Use single-direction wherever possible.",
+    "Severity": 3,
+    "Scope": "Relationship",
+    "Expression": "CrossFilteringBehavior == CrossFilteringBehavior.BothDirections"
+  },
+  {
+    "ID": "MEASURES_USE_DIVIDE_NOT_SLASH",
+    "Name": "DAX should use DIVIDE() not /",
+    "Category": "DAX",
+    "Description": "Bare `/` returns #INF on zero-denominator; DIVIDE(num, denom, 0) gives a safe fallback.",
+    "Severity": 2,
+    "Scope": "Measure",
+    "Expression": "Expression.Contains(\"/\") and not Expression.Contains(\"DIVIDE\")"
+  },
+  {
+    "ID": "COLUMN_HIDDEN_BUT_SHOWN_BY_NAME",
+    "Name": "Hidden columns shouldn't have IsKey set on a visible relationship endpoint",
+    "Category": "Modeling",
+    "Description": "Catches the inverse of COLUMNS_HIDE_FK — a hidden column that's also marked as a relationship key (usually fine, but worth a glance).",
+    "Severity": 1,
+    "Scope": "Column",
+    "Expression": "IsHidden and IsKey and Model.Relationships.Any(it.FromColumn == outerIt or it.ToColumn == outerIt) == false"
+  }
+]

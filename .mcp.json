@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "powerbi_modeling": {
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "mcp_powerbi.ps1"
+      ]
+    },
+    "skills": {
+      "command": "venv/Scripts/python.exe",
+      "args": ["skills_mcp_server.py"]
+    },
+    "pbi": {
+      "command": "venv/Scripts/python.exe",
+      "args": ["pbi_mcp_server.py"]
+    }
+  }
+}

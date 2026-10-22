@@ -1,0 +1,9 @@
+# Container entrypoints MUST be LF. A CRLF checkout makes Linux fail them with
+# "bad interpreter: /usr/bin/env bash^M", which is an opaque way to lose an
+# afternoon. core.autocrlf=true happens to normalize these on commit today —
+# this makes it a guarantee instead of a local setting.
+*.sh            text eol=lf
+Dockerfile      text eol=lf
+*.template      text eol=lf
+*.yaml          text eol=lf
+*.yml           text eol=lf
