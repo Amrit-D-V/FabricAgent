@@ -26,6 +26,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install pytest
         pip install -e . --no-deps
 
     - name: Create test environment configuration
@@ -36,4 +37,4 @@ jobs:
 
     - name: Run pytest test suite
       run: |
-        pytest -v --ignore=evals
+        python -m pytest -v --ignore=evals
