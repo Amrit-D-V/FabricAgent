@@ -30,8 +30,8 @@ jobs:
 
     - name: Create test environment configuration
       run: |
-        mkdir -p /tmp/fabricbi_test_projects
-        echo "PROJECTS_DIR=/tmp/fabricbi_test_projects" >> $GITHUB_ENV
+        mkdir -p /tmp/fabricagent_test_projects
+        echo "PROJECTS_DIR=/tmp/fabricagent_test_projects" >> $GITHUB_ENV
         echo "DB_BACKEND=sqlite" >> $GITHUB_ENV
 
     - name: Run pytest test suite
