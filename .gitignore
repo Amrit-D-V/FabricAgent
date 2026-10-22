@@ -113,7 +113,7 @@ projects/
 
 Dashboards/
 
-assets/
+/assets/
 
 
 # Generated markdown docs (workflow diagrams, summaries, auto-generated reports)
@@ -160,6 +160,9 @@ models_test_v1
 !CODE_OF_CONDUCT.md
 !FABRICAGENT_CONTEXT.md
 !FABRICBI_CONTEXT.md
+!docs/**
+!docs/**/*.md
+!docs/assets/**
 # Skills served to the assistant (vendored + local) ARE source
 !skills/**/*.md
 # Deployment docs are source too
@@ -196,7 +199,7 @@ theme-void/
 # --- The React app is source ------------------------------------------------
 # Several rules above are aimed at Python build output and generated files, and
 # they were silently swallowing the frontend: `lib/` took web/src/lib (the API
-# client, session, nav registry, SSE helper), `assets/` took web/src/assets
+# client, session, nav registry, SSE helper), `/assets/` took web/src/assets
 # (the logo and the mascot), and `*.html` took web/index.html, the app's entry
 # point. A fresh clone produced a React app that could not build.
 #

@@ -8,10 +8,17 @@
 [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey.svg)]()
 [![Zero Cloud Spend](https://img.shields.io/badge/%240%20Tier-Gemini%20%7C%20Ollama-success.svg)]()
+[![GitHub Stars](https://img.shields.io/github/stars/Amrit-D-V/FabricAgent?style=social)](https://github.com/Amrit-D-V/FabricAgent)
 
 **Autonomous Open-Source AI Agent & Terminal Platform for Microsoft Power BI & Microsoft Fabric**
 
 *Transform business requirements, data warehouse schemas, and local files into production-grade Power BI models (TMDL/PBIP) and PBIR reports — powered by multi-provider LLM intelligence and deterministically validated by Tabular Editor BPA and TMDL Doctor.*
+
+<br/>
+
+<img src="docs/assets/terminal-demo.svg" alt="FabricAgent Terminal Assistant" width="100%"/>
+
+<br/><br/>
 
 [Key Features](#-key-features) •
 [Quick Start](#-quick-start) •
@@ -349,6 +356,18 @@ pytest tests/test_cli_scenarios.py tests/test_bpa_engine_scenarios.py
 ## 🤝 Contributing
 
 We welcome community contributions! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) guide and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for full development setup and Pull Request guidelines.
+
+---
+
+## ⭐ Star History
+
+If you find FabricAgent helpful, give us a star on GitHub! It helps more Power BI and Fabric developers discover the project.
+
+<div align="center">
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Amrit-D-V/FabricAgent&type=Date)](https://star-history.com/#Amrit-D-V/FabricAgent&Date)
+
+</div>
 
 ---
 
