@@ -106,6 +106,22 @@ fabricagent tui
 ╰──────────────────────────────────────────────────────────────────────────────╯
 
 fabricagent> Write a safe YoY Sales Growth measure for FactInternetSales
+
+────────────────────────────────────────────────────────────────────────────────
+YoY Sales Growth % = 
+VAR _CurrentYearSales = [Total Sales]
+VAR _PriorYearSales = 
+    CALCULATE(
+        [Total Sales],
+        SAMEPERIODLASTYEAR('DimDate'[FullDateAlternateKey])
+    )
+RETURN
+    DIVIDE(
+        _CurrentYearSales - _PriorYearSales,
+        _PriorYearSales,
+        0
+    )
+────────────────────────────────────────────────────────────────────────────────
 ```
 
 ### Slash Commands in TUI:
