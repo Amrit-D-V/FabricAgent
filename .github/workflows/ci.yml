@@ -34,6 +34,7 @@ jobs:
         mkdir -p /tmp/fabricagent_test_projects
         echo "PROJECTS_DIR=/tmp/fabricagent_test_projects" >> $GITHUB_ENV
         echo "DB_BACKEND=sqlite" >> $GITHUB_ENV
+        echo "AZURE_TENANT_ID=common" >> $GITHUB_ENV
 
     - name: Run pytest test suite
       run: |

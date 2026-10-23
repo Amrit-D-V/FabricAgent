@@ -14,7 +14,7 @@ from config import (
     PBI_WORKSPACE_SCOPE,
 )
 
-_AUTHORITY = f"https://login.microsoftonline.com/{ENTRA_SSO_TENANT_ID}"
+_AUTHORITY = f"https://login.microsoftonline.com/{ENTRA_SSO_TENANT_ID or 'common'}"
 
 # Login only asks for identity. The Power BI token is fetched separately with
 # the refresh token: MSAL cannot mix resources in one request, and asking for
@@ -60,9 +60,10 @@ def _save_cache(cache: msal.SerializableTokenCache, email: str = "") -> None:
 
 
 def _app(cache: msal.SerializableTokenCache) -> msal.ConfidentialClientApplication:
+    authority = f"https://login.microsoftonline.com/{ENTRA_SSO_TENANT_ID or 'common'}"
     return msal.ConfidentialClientApplication(
         ENTRA_SSO_CLIENT_ID,
-        authority=_AUTHORITY,
+        authority=authority,
         client_credential=ENTRA_SSO_CLIENT_SECRET,
         token_cache=cache,
     )

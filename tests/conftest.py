@@ -23,6 +23,7 @@ if str(ROOT) not in sys.path:
 # developer's .env to collect, or CI cannot run it at all. setdefault, so a real
 # local value still wins.
 os.environ.setdefault("PROJECTS_DIR", str(ROOT / ".pytest_projects"))
+os.environ.setdefault("AZURE_TENANT_ID", "common")
 
 # Pin the suite to SQLite. This is an assignment, NOT a setdefault: a real
 # DB_BACKEND=fabric in .env must lose here. It is read at db.database import

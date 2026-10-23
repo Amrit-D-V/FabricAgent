@@ -38,6 +38,11 @@ def caller(monkeypatch):
         monkeypatch.setattr(
             "auth.access_policy.token_upn", lambda t: "admin@example.com" if t else "", raising=False
         )
+        monkeypatch.setattr(
+            "auth.access_policy._role_from_app_users",
+            lambda email: "admin" if email == "admin@example.com" else "viewer",
+            raising=False,
+        )
         return called
 
     return install
